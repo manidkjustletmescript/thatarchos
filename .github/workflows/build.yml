@@ -9,6 +9,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Free Disk Space on Runner
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache
+          sudo docker image prune -a -f
+
       - name: Checkout Source Code
         uses: actions/checkout@v4
 
@@ -17,12 +22,38 @@ jobs:
           docker run --rm --privileged \
             -v ${{ github.workspace }}:/distro \
             archlinux:latest /bin/bash -c "
-              pacman -Syu --noconfirm && \
-              pacman -S --needed --noconfirm archiso git make patch sudo && \
-              cd /distro && \
-              chmod +x airootfs/usr/bin/* 2>/dev/null || true && \
-              mkdir -p /distro/out && \
-              mkarchiso -v -w /tmp/archiso-tmp -o /distro/out /distro
+              set -e
+              echo '[+] Initializing Arch Keyring...'
+              pacman-key --init
+              pacman-key --populate archlinux
+              pacman -Sy --noconfirm archlinux-keyring
+              pacman -Syu --noconfirm
+              pacman -S --needed --noconfirm archiso git make patch sudo sed
+
+              echo '[+] Preparing Archiso Base Profile...'
+              rm -rf /tmp/build-profile /tmp/archiso-work
+              cp -r /usr/share/archiso/configs/releng /tmp/build-profile
+
+              echo '[+] Enabling Multilib Repository...'
+              sed -i '/\[multilib\]/,/Include/s/^[# ]*//' /tmp/build-profile/pacman.conf
+
+              echo '[+] Configuring Distro Identity...'
+              sed -i 's/iso_name=\"archlinux\"/iso_name=\"thatarchos\"/' /tmp/build-profile/profiledef.sh
+              sed -i 's/iso_label=\"ARCH_[^\"]*\"/iso_label=\"THATARCHOS\"/' /tmp/build-profile/profiledef.sh
+
+              echo '[+] Appending Curated Packages...'
+              grep -v '^[[:space:]]*#' /distro/packages.x86_64 | grep -v '^[[:space:]]*$' >> /tmp/build-profile/packages.x86_64
+
+              echo '[+] Overlaying BRONME Shell & Windows Essentials...'
+              cp -r /distro/airootfs/* /tmp/build-profile/airootfs/
+              chmod +x /tmp/build-profile/airootfs/usr/bin/* 2>/dev/null || true
+
+              echo '[+] Registering File Permissions in profiledef.sh...'
+              echo 'file_permissions+=([\"/usr/bin/wine-smart-launcher\"]=\"0:0:755\" [\"/usr/bin/bronme-spotlight\"]=\"0:0:755\")' >> /tmp/build-profile/profiledef.sh
+
+              echo '[+] Building ThatArchOS ISO...'
+              mkdir -p /distro/out
+              mkarchiso -v -w /tmp/archiso-work -o /distro/out /tmp/build-profile
             "
 
       - name: Upload ThatArchOS Bootable ISO Artifact
