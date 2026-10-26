@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Wine Windows Program Loader
+Exec=/usr/bin/wine-smart-launcher %f
+MimeType=application/x-ms-dos-executable;application/x-msi;application/x-msdownload;application/exe;
+Icon=wine
+NoDisplay=false
+StartupNotify=true
+Categories=System;Utility;

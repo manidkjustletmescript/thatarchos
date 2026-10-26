@@ -1,0 +1,78 @@
+/**
+ * BRONME Spotlight Search Theme
+ * Cupertino-inspired centered floating pill search with frosted glass
+ */
+
+* {
+    font: "Noto Sans 13";
+    bg: rgba(28, 28, 30, 0.85);
+    fg: #ffffff;
+    accent: #007aff;
+    border-col: rgba(255, 255, 255, 0.15);
+    selected-bg: rgba(0, 122, 255, 0.85);
+    selected-fg: #ffffff;
+}
+
+window {
+    transparency: "real";
+    background-color: @bg;
+    text-color: @fg;
+    border: 1px solid;
+    border-color: @border-col;
+    border-radius: 18px;
+    width: 650px;
+    location: center;
+    anchor: center;
+    padding: 16px;
+    shadow: true;
+}
+
+inputbar {
+    children: [ prompt, entry ];
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin: 0 0 12px 0;
+}
+
+prompt {
+    font: "Noto Sans Bold 13";
+    text-color: #007aff;
+    margin: 0 8px 0 0;
+}
+
+entry {
+    placeholder: "Spotlight Search (Apps, Files, Settings)...";
+    placeholder-color: rgba(255, 255, 255, 0.4);
+    text-color: @fg;
+}
+
+listview {
+    background-color: transparent;
+    lines: 7;
+    columns: 1;
+    scrollbar: false;
+    spacing: 4px;
+}
+
+element {
+    padding: 8px 12px;
+    border-radius: 10px;
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element selected {
+    background-color: @selected-bg;
+    text-color: @selected-fg;
+}
+
+element-icon {
+    size: 28px;
+    margin: 0 10px 0 0;
+}
+
+element-text {
+    vertical-align: 0.5;
+    text-color: inherit;
+}

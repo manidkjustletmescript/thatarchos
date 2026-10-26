@@ -1,0 +1,26 @@
+# BRONME Frosted Glass Dock Theme for Plank
+[PlankTheme]
+# Top padding
+TopPadding=6
+# Bottom padding
+BottomPadding=6
+# Left and right padding
+ItemPadding=5
+# Indicator size
+IndicatorSize=4
+# Icon shadow size
+IconShadowSize=1
+# Corner radius (pill curved dock)
+Roundness=18
+# Border width
+BorderWidth=1
+# Inner stroke color (frosted glass highlight)
+InnerStrokeColor=255;;255;;255;;80
+# Outer stroke color
+OuterStrokeColor=255;;255;;255;;40
+# Fill start color (semi-translucent frosted glass)
+FillStartColor=240;;240;;245;;175
+# Fill end color
+FillEndColor=230;;230;;235;;195
+# Active indicator color (Apple blue dot)
+IndicatorColor=0;;122;;255;;255

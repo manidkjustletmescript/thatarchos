@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# BRONME SPOTLIGHT LAUNCHER
+# Fast, floating centered search launcher inspired by macOS Spotlight
+# ==============================================================================
+
+rofi -show drun -theme ~/.config/rofi/spotlight.rasi

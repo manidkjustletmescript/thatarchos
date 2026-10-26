@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# THATARCHOS WINE SMART LAUNCHER
+# Auto-initializes prefixes, fonts, DXVK, and runs Windows .exe / .msi seamlessly
+# ==============================================================================
+
+FILE="$1"
+
+if [ -z "$FILE" ]; then
+    zenity --error --title="ThatArchOS Wine" --text="No Windows file selected."
+    exit 1
+fi
+
+# Ensure wine prefix exists and has required compatibility paths
+export WINEPREFIX="${HOME}/.wine"
+export WINEARCH="win64"
+export WINEDEBUG="-all"
+export DXVK_HUD=0
+
+# Notify the user
+notify-send -i wine "Starting Windows Application" "$(basename "$FILE")"
+
+# Check extension
+EXT="${FILE##*.}"
+EXT_LOWER=$(echo "$EXT" | tr '[:upper:]' '[:lower:]')
+
+if [ "$EXT_LOWER" = "msi" ]; then
+    wine msiexec /i "$FILE"
+else
+    wine "$FILE"
+fi

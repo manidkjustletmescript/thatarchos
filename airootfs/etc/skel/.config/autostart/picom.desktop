@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=BRONME Glass Compositor
+Exec=picom -b --config ~/.config/picom/picom.conf
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true

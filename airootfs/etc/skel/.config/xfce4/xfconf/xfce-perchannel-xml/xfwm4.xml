@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xfwm4" version="1.0">
+  <property name="general" type="empty">
+    <!-- Left-aligned traffic light buttons (Close, Minimize, Maximize) -->
+    <property name="button_layout" type="string" value="CMH|"/>
+    <property name="title_alignment" type="string" value="center"/>
+    <property name="theme" type="string" value="Default-hdpi"/>
+    <property name="shadow_delta_x" type="int" value="0"/>
+    <property name="shadow_delta_y" type="int" value="3"/>
+    <property name="shadow_opacity" type="int" value="40"/>
+    <property name="double_click_action" type="string" value="maximize"/>
+  </property>
+</channel>

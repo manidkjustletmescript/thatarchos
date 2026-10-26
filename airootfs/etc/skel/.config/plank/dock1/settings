@@ -1,0 +1,20 @@
+# Plank Dock Settings for BRONME Desktop Environment
+[PlankDockPreferences]
+# Alignment: 3 = center
+Alignment=3
+# Position: 3 = bottom
+Position=3
+# Theme name
+Theme=Bronme
+# Icon size in pixels
+IconSize=56
+# Zoom icon on hover (macOS magnification effect!)
+ZoomEnabled=true
+ZoomPercent=150
+# Bounce icon on application launch (macOS launch bounce!)
+ItemAnimation=true
+# Hide behavior: 1 = Intelligent auto-hide
+HideMode=1
+# Glow active applications
+ShowDockItem=false
+LockItems=false

@@ -1,0 +1,11 @@
+[Default Applications]
+application/x-ms-dos-executable=wine-smart-launcher.desktop
+application/x-msi=wine-smart-launcher.desktop
+application/x-msdownload=wine-smart-launcher.desktop
+application/exe=wine-smart-launcher.desktop
+
+[Added Associations]
+application/x-ms-dos-executable=wine-smart-launcher.desktop;
+application/x-msi=wine-smart-launcher.desktop;
+application/x-msdownload=wine-smart-launcher.desktop;
+application/exe=wine-smart-launcher.desktop;

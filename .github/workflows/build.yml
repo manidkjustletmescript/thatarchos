@@ -1,0 +1,33 @@
+name: Build ThatArchOS Bootable ISO
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Build ThatArchOS ISO via Arch Linux Container
+        run: |
+          docker run --rm --privileged \
+            -v ${{ github.workspace }}:/distro \
+            archlinux:latest /bin/bash -c "
+              pacman -Syu --noconfirm && \
+              pacman -S --needed --noconfirm archiso git make patch sudo && \
+              cd /distro && \
+              chmod +x airootfs/usr/bin/* 2>/dev/null || true && \
+              mkdir -p /distro/out && \
+              mkarchiso -v -w /tmp/archiso-tmp -o /distro/out /distro
+            "
+
+      - name: Upload ThatArchOS Bootable ISO Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ThatArchOS-BRONME-x86_64.iso
+          path: out/*.iso
+          retention-days: 14

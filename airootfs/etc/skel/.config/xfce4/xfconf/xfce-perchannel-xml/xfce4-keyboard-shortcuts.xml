@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xfce4-keyboard-shortcuts" version="1.0">
+  <property name="commands" type="empty">
+    <property name="custom" type="empty">
+      <!-- Super + Space for Spotlight Search -->
+      <property name="&lt;Super&gt;space" type="string" value="/usr/bin/bronme-spotlight"/>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="kitty"/>
+    </property>
+  </property>
+</channel>
